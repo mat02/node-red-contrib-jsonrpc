@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/joeartsea/node-red-contrib-jsonrpc.git"
+    "url": "git+https://github.com/joeartsea/node-red-contrib-json-rpc.git"
   },
   "bugs": {
-    "url": "https://github.com/joeartsea/node-red-contrib-jsonrpc2/issues"
+    "url": "https://github.com/joeartsea/node-red-contrib-json-rpc/issues"
   },
-  "homepage": "https://github.com/joeartsea/node-red-contrib-jsonrpc2#readme",
+  "homepage": "https://github.com/joeartsea/node-red-contrib-json-rpc#readme",
   "node-red": {
     "nodes": {
       "jsonrpc": "jsonrpc/jsonrpc.js"
