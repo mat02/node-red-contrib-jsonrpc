@@ -129,7 +129,6 @@ module.exports = function(RED) {
         node.client.call(method, params, cb);
       } else if(node.connection === 'https') {
         node.client.call(method, params, { https: true }, cb);
-      }
       } else {
         if(!node.conn) {
           return cb(new Error('not connected'), null);
