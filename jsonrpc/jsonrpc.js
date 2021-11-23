@@ -93,7 +93,8 @@ module.exports = function(RED) {
       node.client = rpc.Client.$create(node.port, node.host);
       
       switch(this.connection) {
-        case 'http': {
+        case 'http':
+        case 'https': {
           // no connection required
           node.connected = true;
           node.setUserStatus({fill:'green',shape:'dot',text:'connected'});
@@ -126,6 +127,9 @@ module.exports = function(RED) {
       }
       if(node.connection === 'http') {
         node.client.call(method, params, cb);
+      } else if(node.connection === 'https') {
+        node.client.call(method, params, { https: true }, cb);
+      }
       } else {
         if(!node.conn) {
           return cb(new Error('not connected'), null);
@@ -136,7 +140,7 @@ module.exports = function(RED) {
 
     this.on('close', function(done){
       this.ended = true;
-      if(node.connection === 'http' || !node.conn) {
+      if(node.connection === 'http' || node.connection === 'https' || !node.conn) {
         return done();
       }
 
