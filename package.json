@@ -27,6 +27,6 @@
   "author": "oskar.hagberg@gmail.com",
   "license": "ISC",
   "dependencies": {
-    "json-rpc2": "^1.0.2"
+    "json-rpc2": "git+https://github.com/mat02/node-jsonrpc2.git#50ac798444c8f72cb57778ae670855072d2807d4"
   }
 }
