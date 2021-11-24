@@ -8,8 +8,13 @@
     </div>
 
     <div class="form-row">
-        <label for="node-config-input-host"><i class="fa fa-user"></i> Host</label>
+        <label for="node-config-input-host"><i class="fa fa-user"></i> Host (without protocol and path!)</label>
         <input type="text" id="node-config-input-host">
+    </div>
+    
+    <div class="form-row">
+        <label for="node-config-input-host"><i class="fa fa-user"></i> RPC Path</label>
+        <input type="text" id="node-config-input-path">
     </div>
 
     <div class="form-row">
@@ -35,6 +40,7 @@
         defaults: {
             name:      { value:"" },
             host:      { value:"localhost", required: true },
+            path:      { value:"", required: false },
             port:      { value:"8000", required: true },
             connection:{ value: "ws", required: true}
         },
