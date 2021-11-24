@@ -121,19 +121,27 @@ module.exports = function(RED) {
 
     
 
-    this.methodCall = function(method, params, cb) {
+    this.methodCall = function(method, params, opts, cb) {
       if(!node.connected) {
         return cb(new Error('not connected'), null);
       }
+      
+      let config_opts = {
+        path: this.path,
+      };
+      
+      opts = Object.assign(config_opts, opts);
+      
       if(node.connection === 'http') {
-        node.client.call(method, params, cb);
+        node.client.call(method, params, opts, cb);
       } else if(node.connection === 'https') {
-        node.client.call(method, params, { https: true }, cb);
+        opts.https = true;
+        node.client.call(method, params, opts, cb);
       } else {
         if(!node.conn) {
           return cb(new Error('not connected'), null);
         }
-        node.conn.call(method, params, cb);
+        node.conn.call(method, params, opts, cb);
       }
     };
 
@@ -169,7 +177,8 @@ module.exports = function(RED) {
     this.on('input', function(msg){
       var method = msg.method||node.method;
       var params = [].concat( msg.payload );
-      node.clientConn.methodCall(method,params,function(error, value){
+      var opts = msg.opts || {};
+      node.clientConn.methodCall(method,params, opts, function(error, value){
         if(error) {
           node.error(RED._(error.message));
           return;
